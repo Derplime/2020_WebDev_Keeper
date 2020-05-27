@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 function CreateArea(props) {
-
   const [note, setNote] = useState({
     title: "",
     content: ""
@@ -10,7 +9,7 @@ function CreateArea(props) {
   function handleChange(event) {
     const { name, value } = event.target;
 
-    setNote((prevNote) => {
+    setNote(prevNote => {
       return {
         ...prevNote,
         [name]: value
@@ -20,20 +19,29 @@ function CreateArea(props) {
 
   function submitNote(event) {
     props.onAdd(note);
-
     setNote({
       title: "",
       content: ""
     });
-    // Prevent reloading of page due to button
     event.preventDefault();
   }
 
   return (
     <div>
-      <form>
-        <input name="title" onChange={handleChange} placeholder="Title" value={note.title} />
-        <textarea name="content" onChange={handleChange} placeholder="Take a note..." rows="3" value={note.content} />
+      <form className="create-note">
+        <input
+          name="title"
+          onChange={handleChange}
+          value={note.title}
+          placeholder="Title"
+        />
+        <textarea
+          name="content"
+          onChange={handleChange}
+          value={note.content}
+          placeholder="Take a note..."
+          rows="3"
+        />
         <button onClick={submitNote}>Add</button>
       </form>
     </div>
